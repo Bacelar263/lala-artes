@@ -21,7 +21,7 @@ app.post('/enviar', (req, res, next) => {
     const mensagem = req.body.mensagem;
     require("./nodemail")(email, nome, mensagem)
         .then(response => res.redirect(`http://localhost:5000`))
-        .catch(error => res.json(error));
+        .catch(error => res.json(error)); 
 
 });
 
