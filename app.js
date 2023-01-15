@@ -20,7 +20,7 @@ app.post('/enviar', (req, res, next) => {
     const email = req.body.email;
     const mensagem = req.body.mensagem;
     require("./nodemail")(email, nome, mensagem)
-        .then(response => res.redirect(`http://localhost:5000`))
+        .then(response => res.redirect(`/`))
         .catch(error => res.json(error)); 
 
 });
