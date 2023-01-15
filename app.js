@@ -25,4 +25,4 @@ app.post('/enviar', (req, res, next) => {
 
 });
 
-app.listen(porta, console.log(`Servidor rodando na porta ${porta}`));
+app.listen(process.env.PORT || 5000, () => { console.log(`Servidor rodando na porta ${porta}`)});
