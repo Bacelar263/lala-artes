@@ -87,20 +87,49 @@ let swiperPortfolio = new Swiper(".swiper", {
   
 
 /*=============== ANIMAÇÃO GSAP ===============*/
-TweenMax.from('.home__titulo', 1, {delay: .2, opacity: 0, y: 20, ease: Expo.easeInOut})
-TweenMax.from('.home__descricao', 1, {delay: .3, opacity: 0, y: 20, ease: Expo.easeInOut})
-TweenMax.from('.home__botao', 1, {delay: .4, opacity: 0, y: 20, ease: Expo.easeInOut})
-TweenMax.from('.home__liquido', 1, {delay: .7, opacity: 0, y: 200, ease: Expo.easeInOut})
-TweenMax.from('.home__juice-animate', 1, {delay: 1.2, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__apple1', 1, {delay: 1.5, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__apple2', 1, {delay: 1.6, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(1)', 2, {delay: 1.3, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(2)', 2, {delay: 1.4, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(3)', 2, {delay: 1.5, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(4)', 2, {delay: 1.6, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(5)', 2, {delay: 1.7, opacity: 0, y: -800, ease: Expo.easeInOut})
-TweenMax.from('.home__leaf:nth-child(6)', 2, {delay: 1.8, opacity: 0, y: -800, ease: Expo.easeInOut})
+// Verificar se a largura da tela é maior que 768 pixels (pode ser ajustado de acordo com suas necessidades)
+if (window.innerWidth > 768) {
+    // TweenMax.from('.home__titulo', 1, {delay: .2, opacity: 0, y: 20, ease: Expo.easeInOut});
+    // TweenMax.from('.home__descricao', 1, {delay: .3, opacity: 0, y: 20, ease: Expo.easeInOut});
+    // TweenMax.from('.home__botao', 1, {delay: .4, opacity: 0, y: 20, ease: Expo.easeInOut});
+    // TweenMax.from('.home__liquido', 1, {delay: .7, opacity: 0, y: 200, ease: Expo.easeInOut});
+    // TweenMax.from('.home__juice-animate', 1, {delay: 1.2, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__apple1', 1, {delay: 1.5, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__apple2', 1, {delay: 1.6, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(1)', 2, {delay: 1.3, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(2)', 2, {delay: 1.4, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(3)', 2, {delay: 1.5, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(4)', 2, {delay: 1.6, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(5)', 2, {delay: 1.7, opacity: 0, y: -800, ease: Expo.easeInOut});
+    // TweenMax.from('.home__leaf:nth-child(6)', 2, {delay: 1.8, opacity: 0, y: -800, ease: Expo.easeInOut});
 
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 2000,
+        delay: 400,
+        reset: false
+    })
+    
+    sr.reveal(`.habilidade__dados, .card__article:nth-child(2), .footer__bg`, {delay:400})
+    sr.reveal(`.sobre__dados, .card__article:nth-child(1), .portfolio__titulo, .contato__titulo`, {origin:'left'})
+    sr.reveal(`.sobre__img, .card__article:nth-child(3), .portfolio__container, .contact__container`, {origin:'right'})
+  } else {
+
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 2000,
+        delay: 400,
+        reset: false
+    })
+    
+    sr.reveal(`.habilidade__dados, .card__article:nth-child(2), .footer__bg, .home__titulo, .home__liquido, .home__apple1, .home__apple2, .home__leaf:nth-child(1), .home__leaf:nth-child(2)`, {delay:400})
+    sr.reveal(`.sobre__dados, .card__article:nth-child(1), .portfolio__titulo, .contato__titulo, .home__descricao, .home__botao, .home__leaf:nth-child(3), .home__leaf:nth-child(4)`, {origin:'left'})
+    sr.reveal(`.sobre__img, .card__article:nth-child(3), .portfolio__container, .contact__container, .home__juice-animate, .home__leaf:nth-child(5), .home__leaf:nth-child(6)`, {origin:'right'})
+
+  }
+  
 
 /*================== SEÇÕES FICAREM ATIVAS ==================*/
 const sections = document.querySelectorAll('section[id]')
@@ -132,20 +161,6 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });   
     });
 });
-
-/*================== REVELAÇÃO AO ROLAR ==================*/
-
-const sr = ScrollReveal({
-    origin: 'top',
-    distance: '60px',
-    duration: 2000,
-    delay: 400,
-    reset: false
-})
-
-sr.reveal(`.habilidade__dados, .card__article:nth-child(2), .footer__bg`, {delay:400})
-sr.reveal(`.sobre__dados, .card__article:nth-child(1), .portfolio__titulo, .contato__titulo`, {origin:'left'})
-sr.reveal(`.sobre__img, .card__article:nth-child(3), .portfolio__container, .contact__container`, {origin:'right'})
 
 /*================== MOSTRAR SCROLL UP ==================*/
 
