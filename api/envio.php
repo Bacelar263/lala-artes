@@ -1,32 +1,35 @@
 <?php
 
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader arte
 require __DIR__ . '/vendor/autoload.php';
 
+
 if(isset($_POST['enviar'])) {
     // Chamando classe mail
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail = new PHPMailer(true);
 
     try {
         //Configurar servidor
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
         $mail->isSMTP();                                            
-        $mail->Host       = 'smtp.hostinger.com';                     //Colocar configurações do SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Colocar configurações do SMTP
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'lala@lalaartes.com';                     //SMTP username
-        $mail->Password   = '@Ridufu123_';                               //SMTP password
+        $mail->Username   = 'lalaartes20@gmail.com';                     //SMTP username
+        $mail->Password   = 'doyrspqjaypdhnvd';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        //To load the French version
+        $mail->setLanguage('pt_br', __DIR__ . './vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php');
 
         $email = $_POST['email'];
 
         //Recipients
-        $mail->setFrom('lala_bacelar@hotmail.com', 'Mailer');
-        $mail->addAddress('bacelardev26@gmail.com', 'Guilherme Bacelar');     //Add a recipient
+        $mail->setFrom('lalaartes20@gmail.com', 'Lala Artes');
+        $mail->addAddress('lala_bacelar@hotmail.com', 'Email do usuário');   //Name is optional
         $mail->addAddress($email, 'Email do usuário');               //Name is optional
         $mail->addReplyTo('bacelardev26@gmail.com', 'Information');
         // $mail->addCC('cc@example.com');
@@ -38,7 +41,7 @@ if(isset($_POST['enviar'])) {
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Mensagem via phpmailer';
+        $mail->Subject = 'A empresa Lala Artes agradece seu contato!';
 
         $body = "Mensagem enviada através do site, segue informações abaixo:<br>
                  Nome:". $_POST['nome'] ."<br>
@@ -51,6 +54,14 @@ if(isset($_POST['enviar'])) {
 
         $mail->send();
         echo 'O email foi enviado';
+        
+        // Redirecionar para a página anterior com JavaScript
+        echo '<script>window.location.href = "../index.php?emailenviado=true";</script>';
+
+        // Sair do script para evitar que o restante do código seja executado
+        exit();
+
+
     } catch (Exception $e) {
         echo "Erro ao enviar o email: {$mail->ErrorInfo}";
     }
@@ -59,3 +70,4 @@ if(isset($_POST['enviar'])) {
 }
 
 ?>
+
